@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Game</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(45deg, #8e44ad, #3498db);
+            color: #fff;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: popIn 1s ease-in-out;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0.5);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        #game {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .choice {
+            border: 3px solid #fff;
+            border-radius: 15px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .choice:hover {
+            background-color: #fff;
+            color: #3498db;
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        button {
+            padding: 12px 24px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+        }
+
+        #result, #computerChoice, #score {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 3px solid #fff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            flex: 1;
+            min-width: 200px;
+        }
+
+        #resultText, #computerText, #scoreText {
+            color: #fff;
+            font-size: 1.2em;
+        }
+
+        #resetBtn {
+            margin-top: 20px;
+            background-color: #f39c12;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        #resetBtn:hover {
+            background-color: #e67e22;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .choice {
+                padding: 15px;
+            }
+
+            button, #resetBtn {
+                padding: 10px 20px;
+            }
+
+            #resultText, #computerText, #scoreText {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rock Paper Scissors</h1>
+        <div id="game">
+            <div id="userChoice" class="choice">
+                <h2>You</h2>
+                <button onclick="makeChoice('rock')">Rock</button>
+                <button onclick="makeChoice('paper')">Paper</button>
+                <button onclick="makeChoice('scissors')">Scissors</button>
+            </div>
+            <div id="result">
+                <h2>Result</h2>
+                <p id="resultText">Make your choice to start the game!</p>
+            </div>
+            <div id="computerChoice" class="choice">
+                <h2>Computer</h2>
+                <p id="computerText">Waiting for your move...</p>
+            </div>
+        </div>
+        <div id="score" class="choice">
+            <h2>Score</h2>
+            <p id="scoreText">Wins: 0 | Losses: 0 | Ties: 0</p>
+        </div>
+        <button id="resetBtn" onclick="resetGame()">Reset Game</button>
+    </div>
+
+    <script>
+        const choices = ['rock', 'paper', 'scissors'];
+        let wins = 0;
+        let losses = 0;
+        let ties = 0;
+
+        function getComputerChoice() {
+            const randomIndex = Math.floor(Math.random() * choices.length);
+            return choices[randomIndex];
+        }
+
+        function determineWinner(userChoice, computerChoice) {
+            if (userChoice === computerChoice) {
+                ties++;
+                return 'It\'s a tie!';
+            }
+
+            if ((userChoice === 'rock' && computerChoice === 'scissors') ||
+                (userChoice === 'paper' && computerChoice === 'rock') ||
+                (userChoice === 'scissors' && computerChoice === 'paper')) {
+                wins++;
+                return 'You win!';
+            } else {
+                losses++;
+                return 'Computer wins!';
+            }
+        }
+
+        function updateScore() {
+            document.getElementById('scoreText').innerText = `Wins: ${wins} | Losses: ${losses} | Ties: ${ties}`;
+        }
+
+        function makeChoice(userChoice) {
+            const computerChoice = getComputerChoice();
+
+            document.getElementById('computerText').innerText = `Computer chose: ${computerChoice}`;
+
+            const result = determineWinner(userChoice, computerChoice);
+            document.getElementById('resultText').innerText = result;
+
+            updateScore();
+        }
+
+        function resetGame() {
+            wins = 0;
+            losses = 0;
+            ties = 0;
+            updateScore();
+            document.getElementById('resultText').innerText = 'Make your choice to start the game!';
+            document.getElementById('computerText').innerText = 'Waiting for your move...';
+        }
+    </script>
+</body>
+</html>
