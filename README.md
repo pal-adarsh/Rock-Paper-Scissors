@@ -1,4 +1,4 @@
-# ✊✋✌️ Rock Paper Scissors Game
+# ✊✋✌️ Rock Paper Scissors Game ✊✋✌️ 
 
 A visually stunning and fully interactive **Rock Paper Scissors** game built using **HTML**, **CSS**, and **JavaScript**. It features animations, score tracking, and an engaging UI with dynamic feedback for each match.
 
@@ -36,4 +36,7 @@ A visually stunning and fully interactive **Rock Paper Scissors** game built usi
 ---
 
 ## 📸 Screenshots
+
+![image](https://github.com/user-attachments/assets/89301d96-cbe1-47c4-943c-1844ff50f43d)
+
 
