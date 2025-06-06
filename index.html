@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Rock Paper Scissors</h1>
+        <div id="game">
+            <div class="choice-container">
+                <div id="userChoice" class="choice">
+                    <h2 class="choice-title">Your Choice</h2>
+                    <div class="choice-buttons">
+                        <button class="choice-btn rock" onclick="makeChoice('rock')">
+                            <i class="fas fa-hand-rock"></i>
+                        </button>
+                        <button class="choice-btn paper" onclick="makeChoice('paper')">
+                            <i class="fas fa-hand-paper"></i>
+                        </button>
+                        <button class="choice-btn scissors" onclick="makeChoice('scissors')">
+                            <i class="fas fa-hand-scissors"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="result">
+                <h2 class="choice-title">Result</h2>
+                <div class="choice-icon">
+                    <i id="resultIcon" class="fas fa-question"></i>
+                </div>
+                <p id="resultText" class="result-text">Make your choice!</p>
+            </div>
+            
+            <div class="choice-container">
+                <div id="computerChoice" class="choice">
+                    <h2 class="choice-title">Computer</h2>
+                    <div class="choice-icon">
+                        <i id="computerIcon" class="fas fa-laptop"></i>
+                    </div>
+                    <p id="computerText" class="result-text">Waiting...</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="score">
+            <div class="score-item">
+                <div>Wins</div>
+                <div id="wins" class="score-value">0</div>
+            </div>
+            <div class="score-item">
+                <div>Losses</div>
+                <div id="losses" class="score-value">0</div>
+            </div>
+            <div class="score-item">
+                <div>Ties</div>
+                <div id="ties" class="score-value">0</div>
+            </div>
+        </div>
+        
+        <button id="resetBtn" onclick="resetGame()">
+            <i class="fas fa-redo"></i> Reset Game
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
